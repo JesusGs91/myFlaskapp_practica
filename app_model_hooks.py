@@ -82,7 +82,7 @@ def retrain():  # Rutarlo al endpoint '/api/v1/retrain/', metodo GET
 @app.route("/webhook", methods=["POST"])
 def webhook():
     # Ruta al repositorio donde se realizará el pull
-    path_repo = "/home/jgonzalezsua/myFlaskapp_practica"
+    path_repo = "/home/jgonzalezsua/ myFlaskapp_practica"
     servidor_web = "/var/www/jgonzalezsua_pythonanywhere_com_wsgi.py"
 
     # Comprueba si la solicitud POST contiene datos JSON
