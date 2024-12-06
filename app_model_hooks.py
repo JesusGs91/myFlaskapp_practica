@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 os.chdir(os.path.dirname(__file__))
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='mapp_model_hooks')
 app.config["DEBUG"] = True
 
 
