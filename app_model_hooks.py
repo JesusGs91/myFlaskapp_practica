@@ -4,7 +4,7 @@ import subprocess
 #LALALALA
 import numpy as np
 import pandas as pd
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from sklearn.linear_model import Lasso
 from sklearn.metrics import mean_absolute_percentage_error, mean_squared_error
 from sklearn.model_selection import train_test_split
@@ -19,7 +19,8 @@ app.config["DEBUG"] = True
 # Enruta la landing page (endpoint /)
 @app.route("/", methods=["GET"])
 def hello():
-    return "Bienvenido a mi API del modelo advertising"
+    #return "Bienvenido a mi API del modelo advertising"
+    return render_template("index.html")  # Busca dentro de `mapp_model_hooks`
 
 
 # Enruta la funcion al endpoint /api/v1/predict

@@ -3,21 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predicción</title>
+    <title>API Advertising</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        form {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            padding: 5px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        img {
+            max-width: 300px;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Haz tu predicción</h1>
+    <h1>Bienvenido a mi API del Modelo Advertising</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Machine_Learning.png" alt="Machine Learning">
+    <p>Introduce los valores para realizar una predicción:</p>
     <form action="/predict" method="post">
-        <label for="campo1">Campo 1:</label>
-        <input type="text" id="campo1" name="campo1" required><br><br>
+        <label for="Tv">Inversión en TV:</label>
+        <input type="text" id="Tv" name="Tv" placeholder="Ejemplo: 230.1" required>
 
-        <label for="campo2">Campo 2:</label>
-        <input type="text" id="campo2" name="campo2" required><br><br>
+        <label for="newspaper">Inversión en Periódico:</label>
+        <input type="text" id="newspaper" name="newspaper" placeholder="Ejemplo: 37.8" required>
 
-        <label for="campo3">Campo 3:</label>
-        <input type="text" id="campo3" name="campo3" required><br><br>
+        <label for="radio">Inversión en Radio:</label>
+        <input type="text" id="radio" name="radio" placeholder="Ejemplo: 69.2" required>
 
-        <button type="submit">Enviar</button>
+        <button type="submit">Realizar Predicción</button>
     </form>
 </body>
 </html>
