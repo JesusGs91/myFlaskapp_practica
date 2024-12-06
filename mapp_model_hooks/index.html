@@ -37,6 +37,11 @@
         button:hover {
             background-color: #45a049;
         }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
         img {
             max-width: 300px;
             margin: 20px 0;
@@ -45,9 +50,9 @@
 </head>
 <body>
     <h1>Bienvenido a mi API del Modelo Advertising</h1>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Machine_Learning.png" alt="Machine Learning">
+    <img src="{{ url_for('Imagenes', filename='portada-9.jpg') }}" alt="Machine Learning">
     <p>Introduce los valores para realizar una predicción:</p>
-    <form action="/api/v1/predict" method="post">
+    <form id="predictionForm">
         <label for="Tv">Inversión en TV:</label>
         <input type="text" id="Tv" name="Tv" placeholder="Ejemplo: 230.1" required>
 
@@ -59,5 +64,38 @@
 
         <button type="submit">Realizar Predicción</button>
     </form>
+
+    <!-- Contenedor para mostrar el resultado -->
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evita que el formulario recargue la página
+
+            // Recoge los valores del formulario
+            const Tv = document.getElementById('Tv').value;
+            const newspaper = document.getElementById('newspaper').value;
+            const radio = document.getElementById('radio').value;
+
+            // Realiza la solicitud AJAX
+            fetch('/api/v1/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `Tv=${Tv}&newspaper=${newspaper}&radio=${radio}`
+            })
+            .then(response => response.json()) // Convierte la respuesta a JSON
+            .then(data => {
+                // Muestra la predicción en el contenedor
+                document.getElementById('result').textContent = `La predicción de ventas es: ${data.predictions}`;
+            })
+            .catch(error => {
+                // Manejo de errores
+                console.error('Error:', error);
+                document.getElementById('result').textContent = 'Hubo un error al procesar la solicitud.';
+            });
+        });
+    </script>
 </body>
 </html>
