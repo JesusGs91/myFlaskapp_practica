@@ -13,6 +13,10 @@
         h1 {
             color: #4CAF50;
         }
+        img {
+            max-width: 300px;
+            margin: 20px 0;
+        }
         form {
             display: inline-block;
             margin-top: 20px;
@@ -33,11 +37,12 @@
             padding: 10px 20px;
             border: none;
             cursor: pointer;
+            margin: 10px;
         }
         button:hover {
             background-color: #45a049;
         }
-        #result {
+        #result, #retrainResult {
             margin-top: 20px;
             font-size: 18px;
             color: #333;
@@ -46,6 +51,10 @@
 </head>
 <body>
     <h1>Bienvenido a mi API del Modelo Advertising</h1>
+
+    <!-- Imagen -->
+    <img src="../imagenes/machine_learning.png" alt="Machine Learning">
+
     <p>Introduce los valores para realizar una predicción:</p>
     <form id="predictionForm">
         <label for="Tv">Inversión en TV:</label>
@@ -60,10 +69,15 @@
         <button type="submit">Realizar Predicción</button>
     </form>
 
-    <!-- Contenedor para mostrar el resultado -->
+    <!-- Botón para retrain -->
+    <button id="retrainButton">Retrain Modelo</button>
+
+    <!-- Contenedor para mostrar los resultados -->
     <div id="result"></div>
+    <div id="retrainResult"></div>
 
     <script>
+        // Manejo de predicción
         document.getElementById('predictionForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Evita que el formulario recargue la página
 
@@ -72,7 +86,7 @@
             const newspaper = document.getElementById('newspaper').value;
             const radio = document.getElementById('radio').value;
 
-            // Realiza la solicitud AJAX
+            // Realiza la solicitud AJAX para predicción
             fetch('/api/v1/predict', {
                 method: 'POST',
                 headers: {
@@ -89,6 +103,24 @@
                 // Manejo de errores
                 console.error('Error:', error);
                 document.getElementById('result').textContent = 'Hubo un error al procesar la solicitud.';
+            });
+        });
+
+        // Manejo del botón de retrain
+        document.getElementById('retrainButton').addEventListener('click', function() {
+            // Realiza la solicitud AJAX para retrain
+            fetch('/api/v1/retrain', {
+                method: 'GET',
+            })
+            .then(response => response.text()) // Recibe el resultado como texto
+            .then(data => {
+                // Muestra el resultado del retrain en el contenedor
+                document.getElementById('retrainResult').innerHTML = data;
+            })
+            .catch(error => {
+                // Manejo de errores
+                console.error('Error:', error);
+                document.getElementById('retrainResult').textContent = 'Hubo un error al intentar hacer retrain del modelo.';
             });
         });
     </script>
