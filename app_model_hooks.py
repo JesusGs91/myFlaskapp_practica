@@ -35,9 +35,13 @@ http://127.0.0.1:5000/api/v1/predict?radio=15&newspaper=60&tv=80
 @app.route("/api/v1/predict", methods=["GET"])
 def predict():  # Ligado al endpoint '/api/v1/predict', con el método GET
     model = pickle.load(open("ad_model.pkl", "rb"))
-    tv = request.args.get("tv", None)
-    radio = request.args.get("radio", None)
-    newspaper = request.args.get("newspaper", None)
+    #tv = request.args.get("tv", None)
+    #radio = request.args.get("radio", None)
+    #newspaper = request.args.get("newspaper", None)
+
+    tv = float(request.form.get("Tv"))
+    newspaper = float(request.form.get("newspaper"))
+    radio = float(request.form.get("radio"))
 
     print(tv, radio, newspaper)
     print(type(tv))
@@ -129,4 +133,4 @@ def webhook():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
