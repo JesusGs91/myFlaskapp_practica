@@ -32,7 +32,7 @@ http://127.0.0.1:5000/api/v1/predict?radio=15&newspaper=60&tv=80
 """
 
 
-@app.route("/api/v1/predict", methods=["GET"])
+@app.route("/api/v1/predict", methods=["POST"])
 def predict():  # Ligado al endpoint '/api/v1/predict', con el método GET
     model = pickle.load(open("ad_model.pkl", "rb"))
     #tv = request.args.get("tv", None)
