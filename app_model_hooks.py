@@ -45,15 +45,14 @@ def predict():  # Ligado al endpoint '/api/v1/predict', con el método GET
 
     print(tv, radio, newspaper)
     print(type(tv))
-    try:
-        if tv is None or radio is None or newspaper is None:
-            return "Args empty, the data are not enough to predict, STUPID!!!!"
-        else:
-            prediction = model.predict([[float(tv), float(radio), float(newspaper)]])
+    
+    if tv is None or radio is None or newspaper is None:
+        return "Args empty, the data are not enough to predict, STUPID!!!!"
+    else:
+        prediction = model.predict([[float(tv), float(radio), float(newspaper)]])
 
-        return jsonify({"predictions": prediction[0]})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    return jsonify({"predictions": prediction[0]})
+
 
 """
 La petición de prueba sería:
